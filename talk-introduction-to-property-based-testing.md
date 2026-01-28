@@ -423,8 +423,8 @@ pseudo-code interface:
 ```
 fd0 = open("/tmp/path")
 writeall(fd0, "hello world")
-fd0 = open("/tmp/path")
-readall(fd0, 11)
+fd1 = open("/tmp/path")
+readall(fd1, 11)
 ```
 
 <!-- Note: this is only the program representation,
@@ -569,7 +569,7 @@ last read shouldn't return written data! (file opened read-only)
 
 ### Reproducer
 
-- I tried writing a reproducer for it
+- I wrote a poc reproducer for it
 - https://github.com/stfnw/reproducer-poc-CVE-2022-0847
 - generates actions (syscalls) with appropriate parameters
 

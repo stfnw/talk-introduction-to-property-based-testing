@@ -4,4 +4,5 @@
 
 set -eux -o pipefail
 
-podman run --rm -v $PWD:/home/marp/app/ -e LANG=$LANG docker.io/marpteam/marp-cli -o- talk-introduction-to-property-based-testing.md > talk-introduction-to-property-based-testing.html
+podman run --rm -v $PWD:/home/marp/app/ -e LANG=$LANG docker.io/marpteam/marp-cli       -o- talk-introduction-to-property-based-testing.md > talk-introduction-to-property-based-testing.html
+podman run --rm -v $PWD:/home/marp/app/ -e LANG=$LANG docker.io/marpteam/marp-cli --pdf -o- talk-introduction-to-property-based-testing.md > talk-introduction-to-property-based-testing.pdf

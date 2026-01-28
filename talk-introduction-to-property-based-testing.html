@@ -464,8 +464,8 @@ Write byte buffer, return unit (no return value).</p>
 <h2 id="example-list-of-actions-against-a-filesystem">Example list of actions against a filesystem</h2>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code>fd0 = open(&quot;/tmp/path&quot;)
 writeall(fd0, &quot;hello world&quot;)
-fd0 = open(&quot;/tmp/path&quot;)
-readall(fd0, 11)
+fd1 = open(&quot;/tmp/path&quot;)
+readall(fd1, 11)
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-style="section {
@@ -611,7 +611,7 @@ read(3, &quot;rAAAAx:0&quot;, 8)                               = 8
 <h3 id="reproducer">Reproducer</h3>
 <ul>
 <li>
-<p>I tried writing a reproducer for it</p>
+<p>I wrote a poc reproducer for it</p>
 </li>
 <li>
 <p><a href="https://github.com/stfnw/reproducer-poc-CVE-2022-0847">https://github.com/stfnw/reproducer-poc-CVE-2022-0847</a></p>

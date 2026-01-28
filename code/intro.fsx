@@ -73,7 +73,6 @@ let propSortListTwice (xs: list<int>) : bool =
 // Other examples:
 // - In general: fix point
 // - Inserting element twice into set is same as inserting it once
-// - HTTP GET requests
 // - Removing a file
 // - Formatting code
 // - Filtering a list by some condition
