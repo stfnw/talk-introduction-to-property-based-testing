@@ -209,7 +209,7 @@ Arb.generate<MyUri> |> Gen.sample 10 5
 
 let propRoundTrip (uri: MyUri) =
     let (MyUri uri) = uri
-    let uri_ = System.Uri(uri, System.UriKind.Absolute).ToString()
+    let uri_ = System.Uri(uri, System.UriKind.Absolute).AbsoluteUri
     let uri, uri_ = uri.ToLower(), uri_.ToLower()
     printfn "%s" uri
     printfn "%s" uri_
@@ -218,13 +218,10 @@ let propRoundTrip (uri: MyUri) =
 Check.Quick propRoundTrip
 // Falsifiable, but false positive due to percent encoding.
 
-let propNormalizationIsIdempotent (uria: MyUri) =
-    let (MyUri uria) = uria
-    let uria = System.Uri(uria, System.UriKind.Absolute)
-    let a = uria.ToString()
-
-    let urib = System.Uri(a, System.UriKind.Absolute)
-    let b = urib.ToString()
+let propNormalizationIsIdempotent (uri: MyUri) =
+    let (MyUri uri) = uri
+    let a = System.Uri(uri, System.UriKind.Absolute).AbsoluteUri
+    let b = System.Uri(a, System.UriKind.Absolute).AbsoluteUri
 
     if a <> b then
         printfn ">%s<" a
@@ -236,27 +233,17 @@ let propNormalizationIsIdempotent (uria: MyUri) =
 
 Check.One({ Config.Quick with MaxTest = 100000 }, propNormalizationIsIdempotent)
 
-// The following two behaviors could potentially be bugs (could also be that I misunderstood):
-
-// >rcsg8:?Q/+? <
-// >rcsg8:?Q/+?<
-// Original: MyUri "RcsG8:?Q/+?%20"
+// This behavior could potentially be a bug (could also be that I misunderstood):
+// >pre:I:/'%aF??<
+// >pre:I:/'%aF??I:/'%aF??<
+// Original: MyUri "Pre:I:/'%aF??"
 Check.One(
     { Config.Quick with
-        Replay = Some(Random.StdGen(1697047952, 297581869))
+        Replay = Some(Random.StdGen(412023485, 297582566))
         MaxTest = 100000 },
     propNormalizationIsIdempotent
 )
 
-// >xfj:g|//q9?I<
-// >xfj:g://q9?I<
-// Original: MyUri "Xfj:g%7C//q9?I"
-Check.One(
-    { Config.Quick with
-        Replay = Some(Random.StdGen(564379221, 297581875))
-        MaxTest = 100000 },
-    propNormalizationIsIdempotent
-)
 
 let propNormalizeDotSegments (uri: MyUri) =
     let (MyUri uri) = uri
