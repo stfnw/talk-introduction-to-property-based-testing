@@ -189,7 +189,7 @@ doing something twice is the same as doing it once
 
 ### Hard to solve, easy to verify
 
-- e.g. NP hard problems
+- e.g. NP complete problems
 - example: scheduling / resource allocation, `scheduling.fsx`
     - *verification* of output of `findSchedule` is easy
     - if sum of task times $>$ sum of machine capacities: no valid schedule exists
